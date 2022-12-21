@@ -6,14 +6,21 @@ export default function Column({ column, tasks }) {
   // console.log(column);
   // console.log(tasks);
   return (
-    <Paper sx={{ padding: 2, maxWidth: 200 }} elevation={4}>
-      <Droppable droppableId={column.id}>
-        {(provided) => (
-          <List
-            subheader={column.title}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
+    <Droppable droppableId={column.id}>
+      {(provided, snapshot) => (
+        <Paper
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          isDragginOver={snapshot.isDraggingOver}
+          sx={{
+            padding: 2,
+            maxWidth: 200,
+            backgroundColor: snapshot.isDraggingOver ? "skyblue" : "white",
+            transition: "background-color 0.3s ease",
+          }}
+          elevation={4}
+        >
+          <List subheader={column.title}>
             {tasks.map((task, index) => {
               return (
                 <Task
@@ -26,8 +33,8 @@ export default function Column({ column, tasks }) {
             })}
             {provided.placeholder}
           </List>
-        )}
-      </Droppable>
-    </Paper>
+        </Paper>
+      )}
+    </Droppable>
   );
 }

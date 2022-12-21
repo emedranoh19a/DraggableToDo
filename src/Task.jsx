@@ -10,16 +10,18 @@ import { Draggable } from "react-beautiful-dnd";
 export default function Task({ id, content, icon, index }) {
   return (
     <Draggable key={id} draggableId={id} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <ListItem
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+          isDragging={snapshot.isDragging}
           sx={{
-            backgroundColor: "white",
+            marginBottom: "5px",
             border: "2px solid #ddd",
             borderRadius: "10px",
-            marginBottom: "5px",
+            backgroundColor: snapshot.isDragging ? "lightgreen" : "white",
+            transition: "background-color 0.3s ease",
           }}
         >
           <ListItemAvatar>
