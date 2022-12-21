@@ -11,7 +11,7 @@ const initialData = {
     },
     "task-2": {
       id: "task-2",
-      content: "Watch y favorite show",
+      content: "Watch my favorite TV show",
       icon: <TvRoundedIcon />,
     },
     "task-3": {
