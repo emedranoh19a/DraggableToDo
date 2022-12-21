@@ -9,7 +9,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 export default function Task({ id, content, icon, index }) {
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable key={id} draggableId={id} index={index}>
       {(provided) => (
         <ListItem
           {...provided.draggableProps}
