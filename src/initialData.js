@@ -32,8 +32,20 @@ const initialData = {
       //hacemos referencia a cada objeto de task
       taskIds: ["task-1", "task-2", "task-3", "task-4"],
     },
+    "column-2": {
+      id: "column-2",
+      title: "In progress",
+      //hacemos referencia a cada objeto de task
+      taskIds: [],
+    },
+    "column-3": {
+      id: "column-3",
+      title: "Done",
+      //hacemos referencia a cada objeto de task
+      taskIds: [],
+    },
   },
-  columnOrder: ["column-1"],
+  columnOrder: ["column-1", "column-2", "column-3"],
 };
 
 export default initialData;

@@ -8,19 +8,18 @@ export default function Column({ column, tasks }) {
   return (
     <Droppable droppableId={column.id}>
       {(provided, snapshot) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-          {...snapshot.isDraggingOver}
-        >
+        <div ref={provided.innerRef} {...snapshot.isDraggingOver}>
           <Paper
             sx={{
               padding: 2,
               width: "100%",
+              minWidth: "150px",
+              minHeight: "220px",
               backgroundColor: snapshot.isDraggingOver ? "skyblue" : "white",
               transition: "background-color 0.3s ease",
             }}
             elevation={4}
+            {...provided.droppableProps}
           >
             <List subheader={column.title}>
               {tasks.map((task, index) => {
