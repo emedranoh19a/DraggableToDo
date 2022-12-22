@@ -1,21 +1,24 @@
 import {
   Avatar,
+  Box,
+  Grid,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Paper,
 } from "@mui/material";
+import { styled } from "@mui/system";
 import { Draggable } from "react-beautiful-dnd";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 export default function Task({ id, content, icon, index }) {
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(provided, snapshot) => (
         <ListItem
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
           ref={provided.innerRef}
-          isDragging={snapshot.isDragging}
+          {...provided.draggableProps}
+          {...snapshot.isDragging}
           sx={{
             marginBottom: "5px",
             border: "2px solid #ddd",
@@ -24,6 +27,9 @@ export default function Task({ id, content, icon, index }) {
             transition: "background-color 0.3s ease",
           }}
         >
+          <div {...provided.dragHandleProps}>
+            <DragIndicatorIcon fontSize="large" sx={{ fill: "#ddd" }} />
+          </div>
           <ListItemAvatar>
             <Avatar>{icon}</Avatar>
           </ListItemAvatar>

@@ -4,6 +4,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import initialData from "./initialData";
 import Column from "./Column";
 import "./App.css";
+import { Grid } from "@mui/material";
 function App() {
   //console.log(initialData);
 
@@ -60,18 +61,24 @@ function App() {
     setState(newState);
   }
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      {state.columnOrder.map((columnId) => {
-        const column = state.columns[columnId];
-        // const tasks = column.taskIds;
-        const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
-        // console.log(tasks); era un arreglo de ids.
-        {
-          /* console.log(tasks); //pero esto es un arreglo de objetos */
-        }
-        return <Column key={column.id} column={column} tasks={tasks} />;
-      })}
-    </DragDropContext>
+    <Grid container spacing={3}>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {state.columnOrder.map((columnId) => {
+          const column = state.columns[columnId];
+          // const tasks = column.taskIds;
+          const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
+          // console.log(tasks); era un arreglo de ids.
+          {
+            /* console.log(tasks); //pero esto es un arreglo de objetos */
+          }
+          return (
+            <Grid key={column.id} item xs={4}>
+              <Column column={column} tasks={tasks} />
+            </Grid>
+          );
+        })}
+      </DragDropContext>
+    </Grid>
   );
 }
 
