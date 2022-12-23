@@ -13,8 +13,14 @@ import { Draggable } from "react-beautiful-dnd";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 export default function Task({ id, content, icon, index }) {
+  const isDragDisabled = id === "task-1";
   return (
-    <Draggable key={id} draggableId={id} index={index}>
+    <Draggable
+      key={id}
+      draggableId={id}
+      index={index}
+      isDragDisabled={isDragDisabled}
+    >
       {(provided, snapshot) => (
         <ListItem
           ref={provided.innerRef}
@@ -25,7 +31,11 @@ export default function Task({ id, content, icon, index }) {
             marginBottom: "5px",
             border: "2px solid #ddd",
             borderRadius: "10px",
-            backgroundColor: snapshot.isDragging ? "lightgreen" : "white",
+            backgroundColor: isDragDisabled
+              ? "lightgrey"
+              : snapshot.isDragging
+              ? "lightgreen"
+              : "white",
             transition: "background-color 0.3s ease",
           }}
         >

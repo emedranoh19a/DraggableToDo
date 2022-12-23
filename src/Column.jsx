@@ -1,12 +1,12 @@
 import { List, Paper } from "@mui/material";
 import { Droppable } from "react-beautiful-dnd";
 import Task from "./Task";
-export default function Column({ column, tasks }) {
+export default function Column({ column, tasks, isDropDisabled }) {
   // console.log("Inside a column");
   // console.log(column);
   // console.log(tasks);
   return (
-    <Droppable droppableId={column.id}>
+    <Droppable droppableId={column.id} isDropDisabled={isDropDisabled}>
       {(provided, snapshot) => (
         <div ref={provided.innerRef} {...snapshot.isDraggingOver}>
           <Paper

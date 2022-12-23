@@ -9,8 +9,13 @@ function App() {
   //console.log(initialData);
 
   const [state, setState] = useState(initialData);
-
+  function onDragStart(start) {
+    const homeIndex = state.columnOrder.indexOf(start.source.droppableId);
+    setState({ ...state, homeIndex });
+  }
   function onDragEnd(result) {
+    setState({ ...state, homeIndex: null });
+
     const { destination, source, draggableId } = result;
     //Dropped into an undroppable zone?
     if (!destination) {
@@ -76,20 +81,21 @@ function App() {
 
     setState(newState);
   }
+  console.log(state);
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
       <Grid container spacing={8} sx={{ width: "80%", margin: "0 auto" }}>
-        {state.columnOrder.map((columnId) => {
+        {state.columnOrder.map((columnId, index) => {
           const column = state.columns[columnId];
-          // const tasks = column.taskIds;
           const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
-          // console.log(tasks); era un arreglo de ids.
-          {
-            /* console.log(tasks); //pero esto es un arreglo de objetos */
-          }
+          const isDropDisabled = index < state.homeIndex;
           return (
             <Grid key={column.id} item xs={4}>
-              <Column column={column} tasks={tasks} />
+              <Column
+                column={column}
+                tasks={tasks}
+                isDropDisabled={isDropDisabled}
+              />
             </Grid>
           );
         })}
